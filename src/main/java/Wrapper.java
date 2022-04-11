@@ -2,9 +2,9 @@ public class Wrapper {
     public String wrap(String text, int columnsWidth) {
         if (text.length() == 0) return "";
 
-        if (columnsWidth == 0) throw new IllegalArgumentException("Zero are not allowed");
+        isColumnWidthZero(columnsWidth);
 
-        isColumnIsNegative(columnsWidth);
+        isColumnWidthNegative(columnsWidth);
 
         if (text.length() <= columnsWidth) return text;
 
@@ -16,7 +16,11 @@ public class Wrapper {
         return firstWrap.concat(wrap(remainingText, columnsWidth));
     }
 
-    private void isColumnIsNegative(int columnsWidth) {
+    private void isColumnWidthZero(int columnsWidth) {
+        if (columnsWidth == 0) throw new IllegalArgumentException("Zero are not allowed");
+    }
+
+    private void isColumnWidthNegative(int columnsWidth) {
         if (columnsWidth < 0) throw new IllegalArgumentException("Negative numbers are not allowed");
     }
 
