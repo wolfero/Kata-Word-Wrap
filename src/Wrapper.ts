@@ -6,7 +6,7 @@ export class Wrapper {
 
     this.isColumnWidthNegative(columnWidth);
 
-    return text;
+    return text.substring(0,columnWidth)+"\n"+text.substring(columnWidth);
   }
 
   private isColumnWidthZero(columnWidth: number) {
