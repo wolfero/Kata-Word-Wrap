@@ -12,5 +12,11 @@ describe("Word Wrap Should", () => {
         "Negative numbers are not allowed"
       );
     });
+    it("Zero are not allowed", () => {
+      let wrapper = new Wrapper();
+      expect(() => wrapper.wrap("test", 0)).toThrowError(
+        "Zero are not allowed"
+      );
+    });
   });
 });
