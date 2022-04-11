@@ -8,11 +8,10 @@ public class Wrapper {
 
         if (text.length() <= columnsWidth) return text;
 
-        boolean shouldWrappedInBlankSpace = isWrappedInBlankSpace(text, columnsWidth);
-        int wrapLimit = (shouldWrappedInBlankSpace) ? text.lastIndexOf(" ", columnsWidth) : columnsWidth;
+        final int wrapLimit = obtainWrapLimit(text, columnsWidth);
 
-        String firstWrap = text.substring(0, wrapLimit).concat("\n");
-        String remainingText = text.substring(wrapLimit).trim();
+        final var firstWrap = text.substring(0, wrapLimit).concat("\n");
+        final var remainingText = text.substring(wrapLimit).trim();
         return firstWrap.concat(wrap(remainingText, columnsWidth));
     }
 
@@ -22,6 +21,11 @@ public class Wrapper {
 
     private void isColumnWidthNegative(int columnsWidth) {
         if (columnsWidth < 0) throw new IllegalArgumentException("Negative numbers are not allowed");
+    }
+
+    private int obtainWrapLimit(String text, int columnsWidth) {
+        boolean shouldWrappedInBlankSpace = isWrappedInBlankSpace(text, columnsWidth);
+        return (shouldWrappedInBlankSpace) ? text.lastIndexOf(" ", columnsWidth) : columnsWidth;
     }
 
     private boolean isWrappedInBlankSpace(String text, int columnsWidth) {
