@@ -1,14 +1,30 @@
 export class Wrapper {
-  public wrap(text: string, columnWidth: number): string {
+  public wrap(text: string, columnsWidth: number): string {
     if (text === "") return "";
 
-    this.isColumnWidthZero(columnWidth);
+    if (text.length <= columnsWidth) return text;
 
-    this.isColumnWidthNegative(columnWidth);
+    this.isColumnWidthZero(columnsWidth);
 
-    let firstWrap=text.substring(0,columnWidth)+"\n";
-    let remainingText=text.substring(columnWidth);
-    return firstWrap+remainingText;
+    this.isColumnWidthNegative(columnsWidth);
+
+    let firstWrap = "";
+    let remainingText = "";
+    if (
+      text.includes(" ") &&
+      text.lastIndexOf(" ", columnsWidth) < columnsWidth
+    ) {
+      firstWrap = text
+        .substring(0, text.lastIndexOf(" ", columnsWidth))
+        .concat("\n");
+      remainingText = text
+        .substring(text.lastIndexOf(" ", columnsWidth))
+        .trim();
+    } else {
+      firstWrap = text.substring(0, columnsWidth).concat("\n");
+      remainingText = text.substring(columnsWidth).trim();
+    }
+    return firstWrap + this.wrap(remainingText, columnsWidth);
   }
 
   private isColumnWidthZero(columnWidth: number) {
