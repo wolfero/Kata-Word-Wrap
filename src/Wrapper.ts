@@ -3,6 +3,8 @@ export class Wrapper {
     if (text === "") return "";
 
     this.isColumnWidthNegative(columnWidth);
+    if (columnWidth === 0) throw "Zero are not allowed";
+
     return text;
   }
 
