@@ -32,7 +32,7 @@ public class WordWrapperShould {
     void negative_numbers_are_not_allowed() {
         String expectedMessage = "Negative numbers are not allowed";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> wordWrapper.wrap("", -4));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> wordWrapper.wrap("hola", -4));
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
