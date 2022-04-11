@@ -6,21 +6,20 @@ public class Wrapper {
 
         if (text.length() <= columnsWidth) return text;
 
-        String firstWrap;
-        String remainingText;
-        if (text.contains(" ") && text.lastIndexOf(' ', columnsWidth) < columnsWidth) {
-            firstWrap = text.substring(0, text.lastIndexOf(' ', columnsWidth)).concat("\n");
-            remainingText = text.substring(text.lastIndexOf(' ', columnsWidth)).replaceFirst(" ", "");
-        } else {
-            firstWrap = text.substring(0, columnsWidth).concat("\n");
-            remainingText = text.substring(columnsWidth).replaceFirst(" ", "");
-            ;
-        }
+        boolean shouldWrappedInBlankSpace = isWrappedInBlankSpace(text, columnsWidth);
+        int wrapLimit = (shouldWrappedInBlankSpace) ? text.lastIndexOf(" ", columnsWidth) : columnsWidth;
+        String firstWrap = text.substring(0, wrapLimit).concat("\n");
+        String remainingText = text.substring(wrapLimit).trim();
 
         return firstWrap.concat(wrap(remainingText, columnsWidth));
     }
 
     private void isColumnIsNegative(int columnsWidth) {
         if (columnsWidth < 0) throw new IllegalArgumentException("Negative numbers are not allowed");
+    }
+
+    private boolean isWrappedInBlankSpace(String text, int columnsWidth) {
+        int blankSpaceIndex = text.lastIndexOf(" ", columnsWidth);
+        return 0 < blankSpaceIndex && blankSpaceIndex < columnsWidth;
     }
 }

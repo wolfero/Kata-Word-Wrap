@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -11,10 +12,8 @@ public class WrapperShould {
      *  ("hola",-4) -> "Negative numbers are not permitted"
      *  ("hola",0) -> "Zero not allowed"
      *  ("hola",4) -> "hola"
-     *  ("abc def",3) -> "abc\ndef"
      *  ("hello world",7) -> "hello\nworld"
-     *  ("a lot of words for a single line", 10) -> "a lot of\nwords for\na single\nline"
-     *  ("practicando TDD en Java",4) -> "prac\ntica\nndo\nTDD\nen\Java"
+     *  ("learning TDD in Java",4) -> "lear\nning\nTDD\nin\nJava"
      * */
     private Wrapper wrapper;
 
@@ -40,12 +39,18 @@ public class WrapperShould {
 
     @Test
     void returns_wrapped_string_if_given_the_correct_format_of_string_and_a_number() {
-        assertThat(wrapper.wrap("abc def", 3)).isEqualTo("abc\ndef");
+        assertThat(wrapper.wrap("hola", 3)).isEqualTo("hol\na");
     }
 
     @Test
     void returns_wrapped_string_on_space_and_does_not_break_the_word() {
         assertThat(wrapper.wrap("hello world", 7)).isEqualTo("hello\nworld");
+        assertThat(wrapper.wrap("learning TDD width Java", 4)).isEqualTo("lear\nning\nTDD\nwidt\nh\nJava");
+    }
+
+    @Test
+    void returns_wrapped_string_on_space_if_have_long_word() {
+        assertThat(wrapper.wrap("this book is uncopyrightable", 7)).isEqualTo("this\nbook is\nuncopyr\nightabl\ne");
     }
 
 }
