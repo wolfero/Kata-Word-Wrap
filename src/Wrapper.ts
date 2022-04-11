@@ -6,7 +6,9 @@ export class Wrapper {
 
     this.isColumnWidthNegative(columnWidth);
 
-    return text.substring(0,columnWidth)+"\n"+text.substring(columnWidth);
+    let firstWrap=text.substring(0,columnWidth)+"\n";
+    let remainingText=text.substring(columnWidth);
+    return firstWrap+remainingText;
   }
 
   private isColumnWidthZero(columnWidth: number) {
