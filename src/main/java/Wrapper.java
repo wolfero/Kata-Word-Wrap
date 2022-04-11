@@ -10,6 +10,7 @@ public class Wrapper {
 
         boolean shouldWrappedInBlankSpace = isWrappedInBlankSpace(text, columnsWidth);
         int wrapLimit = (shouldWrappedInBlankSpace) ? text.lastIndexOf(" ", columnsWidth) : columnsWidth;
+
         String firstWrap = text.substring(0, wrapLimit).concat("\n");
         String remainingText = text.substring(wrapLimit).trim();
         return firstWrap.concat(wrap(remainingText, columnsWidth));
