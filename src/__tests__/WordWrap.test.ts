@@ -6,5 +6,11 @@ describe("Word Wrap Should", () => {
       let wrapper = new Wrapper();
       expect(wrapper.wrap("", 4)).toBe("");
     });
+    it("Negative numbers are not allowed", () => {
+      let wrapper = new Wrapper();
+      expect(() => wrapper.wrap("", -4)).toThrowError(
+        "Negative numbers are not allowed"
+      );
+    });
   });
 });
