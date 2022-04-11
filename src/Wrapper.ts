@@ -8,22 +8,10 @@ export class Wrapper {
 
     this.isColumnWidthNegative(columnsWidth);
 
-    let firstWrap = "";
-    let remainingText = "";
-    if (
-      text.includes(" ") &&
-      text.lastIndexOf(" ", columnsWidth) < columnsWidth
-    ) {
-      firstWrap = text
-        .substring(0, text.lastIndexOf(" ", columnsWidth))
-        .concat("\n");
-      remainingText = text
-        .substring(text.lastIndexOf(" ", columnsWidth))
-        .trim();
-    } else {
-      firstWrap = text.substring(0, columnsWidth).concat("\n");
-      remainingText = text.substring(columnsWidth).trim();
-    }
+    const wrapLimit = this.obtainWrapLimit(text, columnsWidth);
+
+    const firstWrap = text.substring(0, wrapLimit).concat("\n");
+    const remainingText = text.substring(wrapLimit).trim();
     return firstWrap + this.wrap(remainingText, columnsWidth);
   }
 
@@ -33,5 +21,14 @@ export class Wrapper {
 
   private isColumnWidthNegative(columnWidth: number) {
     if (columnWidth < 0) throw "Negative numbers are not allowed";
+  }
+
+  private obtainWrapLimit(text: string, columnsWidth: number): number {
+    const shouldWrappedInBlankSpace =this.isWrappedInBlankSpace(text, columnsWidth);
+    return (shouldWrappedInBlankSpace) ? text.lastIndexOf(" ", columnsWidth) : columnsWidth;;
+  }
+  private isWrappedInBlankSpace(text:string,columnsWidth:number):boolean{
+    let blankSpaceIndex = text.lastIndexOf(" ", columnsWidth);
+    return 0 < blankSpaceIndex && blankSpaceIndex < columnsWidth;
   }
 }
