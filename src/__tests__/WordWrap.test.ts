@@ -30,5 +30,11 @@ describe("Word Wrap Should", () => {
         "i'm\ndoing\nTDD in\nTypeSc\nript"
       );
     });
+    it("Returns wrapped string on space if have long word", () => {
+      let wrapper = new Wrapper();
+      expect(wrapper.wrap("this book is uncopyrightable", 7)).toBe(
+        "this\nbook is\nuncopyr\nightabl\ne"
+      );
+    });
   });
 });
