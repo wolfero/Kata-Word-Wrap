@@ -37,4 +37,9 @@ public class WordWrapperShould {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void returns_wrapped_string_if_given_the_correct_format_of_string_and_a_number() {
+        assertThat(wordWrapper.wrap("abc def", 3)).isEqualTo("abc\ndef");
+    }
 }
