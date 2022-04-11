@@ -19,4 +19,10 @@ describe("Word Wrap Should", () => {
       );
     });
   });
+  describe("Execution", () => {
+    it("Returns wrapped string if given the correct format of string and a number", () => {
+      let wrapper = new Wrapper();
+      expect(wrapper.wrap("test", 3)).toBe("tes\nt");
+    });
+  });
 });

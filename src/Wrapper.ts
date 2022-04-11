@@ -10,8 +10,7 @@ export class Wrapper {
   }
 
   private isColumnWidthZero(columnWidth: number) {
-    if (columnWidth === 0)
-      throw "Zero are not allowed";
+    if (columnWidth === 0) throw "Zero are not allowed";
   }
 
   private isColumnWidthNegative(columnWidth: number) {
