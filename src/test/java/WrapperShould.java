@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -7,14 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WrapperShould {
-    /*TODO
-     *  ("",4) -> ""
-     *  ("hola",-4) -> "Negative numbers are not permitted"
-     *  ("hola",0) -> "Zero not allowed"
-     *  ("hola",4) -> "hola"
-     *  ("hello world",7) -> "hello\nworld"
-     *  ("learning TDD in Java",4) -> "lear\nning\nTDD\nin\nJava"
-     * */
     private Wrapper wrapper;
 
     @BeforeEach
@@ -32,6 +23,16 @@ public class WrapperShould {
         String expectedMessage = "Negative numbers are not allowed";
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> wrapper.wrap("hola", -4));
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void zero_are_not_allowed() {
+        String expectedMessage = "Zero are not allowed";
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> wrapper.wrap("hola", 0));
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
