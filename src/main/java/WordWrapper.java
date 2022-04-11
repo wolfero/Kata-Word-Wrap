@@ -4,8 +4,11 @@ public class WordWrapper {
 
         isColumnIsNegative(columnsWidth);
 
+        if (text.length() <= columnsWidth) return text;
 
-        return text.substring(0, columnsWidth) + "\n" + text.substring(columnsWidth + 1);
+        String firstWord = text.substring(0, columnsWidth);
+        String restOfText = text.substring(columnsWidth).trim();
+        return firstWord + "\n" + wrap(restOfText, columnsWidth);
     }
 
     private void isColumnIsNegative(int columnsWidth) {
