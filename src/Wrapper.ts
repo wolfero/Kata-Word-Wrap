@@ -2,10 +2,16 @@ export class Wrapper {
   public wrap(text: string, columnWidth: number): string {
     if (text === "") return "";
 
+    this.isColumnWidthZero(columnWidth);
+
     this.isColumnWidthNegative(columnWidth);
-    if (columnWidth === 0) throw "Zero are not allowed";
 
     return text;
+  }
+
+  private isColumnWidthZero(columnWidth: number) {
+    if (columnWidth === 0)
+      throw "Zero are not allowed";
   }
 
   private isColumnWidthNegative(columnWidth: number) {
