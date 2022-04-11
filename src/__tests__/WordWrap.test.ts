@@ -8,7 +8,7 @@ describe("Word Wrap Should", () => {
     });
     it("Negative numbers are not allowed", () => {
       let wrapper = new Wrapper();
-      expect(() => wrapper.wrap("", -4)).toThrowError(
+      expect(() => wrapper.wrap("test", -4)).toThrowError(
         "Negative numbers are not allowed"
       );
     });
