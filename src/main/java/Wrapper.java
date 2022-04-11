@@ -6,9 +6,17 @@ public class Wrapper {
 
         if (text.length() <= columnsWidth) return text;
 
+        String firstWrap;
+        String remainingText;
+        if (text.contains(" ") && text.lastIndexOf(' ', columnsWidth) < columnsWidth) {
+            firstWrap = text.substring(0, text.lastIndexOf(' ', columnsWidth)).concat("\n");
+            remainingText = text.substring(text.lastIndexOf(' ', columnsWidth)).replaceFirst(" ", "");
+        } else {
+            firstWrap = text.substring(0, columnsWidth).concat("\n");
+            remainingText = text.substring(columnsWidth).replaceFirst(" ", "");
+            ;
+        }
 
-        String firstWrap = text.substring(0, columnsWidth).concat("\n");
-        String remainingText = text.substring(columnsWidth).replaceFirst(" ", "");
         return firstWrap.concat(wrap(remainingText, columnsWidth));
     }
 
