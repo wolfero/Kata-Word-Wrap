@@ -5,7 +5,7 @@ public class WordWrapper {
         isColumnIsNegative(columnsWidth);
 
 
-        return text;
+        return text.substring(0, columnsWidth) + "\n" + text.substring(columnsWidth + 1);
     }
 
     private void isColumnIsNegative(int columnsWidth) {
