@@ -1,20 +1,22 @@
 export class Wrapper {
   public wrap(text: string, columnsWidth: number): string {
+    this.validate(columnsWidth);
+
     if (text === "") return "";
 
     if (text.length <= columnsWidth) return text;
 
-    this.isColumnWidthZero(columnsWidth);
-
-    this.isColumnWidthNegative(columnsWidth);
-
     const wrapLimit = this.obtainWrapLimit(text, columnsWidth);
-
-    const [firstWrap, remainingText] = this.splitFirstWrapAndRemainingText(
+    const [wrapped, remainingText] = this.splitFirstWrapAndRemainingText(
       text,
       wrapLimit
     );
-    return firstWrap + this.wrap(remainingText, columnsWidth);
+    return wrapped + this.wrap(remainingText, columnsWidth);
+  }
+
+  private validate(columnsWidth: number) {
+    this.isColumnWidthZero(columnsWidth);
+    this.isColumnWidthNegative(columnsWidth);
   }
 
   private isColumnWidthZero(columnWidth: number) {
@@ -35,15 +37,15 @@ export class Wrapper {
       : columnsWidth;
   }
   private isWrappedInBlankSpace(text: string, columnsWidth: number): boolean {
-    let blankSpaceIndex = text.lastIndexOf(" ", columnsWidth);
+    const blankSpaceIndex = text.lastIndexOf(" ", columnsWidth);
     return 0 < blankSpaceIndex && blankSpaceIndex < columnsWidth;
   }
   private splitFirstWrapAndRemainingText(
     text: string,
     wrapLimit: number
   ): string[] {
-    const firstWrap = text.substring(0, wrapLimit).concat("\n");
+    const wrapped = text.substring(0, wrapLimit).concat("\n");
     const remainingText = text.substring(wrapLimit).trim();
-    return [firstWrap, remainingText];
+    return [wrapped, remainingText];
   }
 }
