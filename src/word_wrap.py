@@ -5,7 +5,7 @@ class WordWrapper:
         if len(text) == 0:
             return ""
 
-        return text
+        return text[0:columnWidth]+"\n"+text[columnWidth]
 
     def isNegativeNumber(self, columnWidth):
         if columnWidth <= 0:
