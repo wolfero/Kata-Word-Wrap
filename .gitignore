@@ -6,3 +6,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 .hypothesis/
+
+# Ejemplo
+src/narcissistic_number.py
+test/test_narcissistic_number.py
