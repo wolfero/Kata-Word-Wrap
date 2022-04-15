@@ -24,3 +24,8 @@ class TestWordWrap(TestCase):
         word_wrapper = WordWrapper()
 
         assert_that(word_wrapper.wrap("test", 3)).is_equal_to("tes\nt")
+
+    def test_returns_wrapped_string_on_space_and_does_not_break_the_word(self):
+        word_wrapper = WordWrapper()
+
+        assert_that(word_wrapper.wrap("TDD in Python", 3)).is_equal_to("TDD\nin\nPyt\nhon")
