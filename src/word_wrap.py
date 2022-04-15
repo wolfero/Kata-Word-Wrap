@@ -8,23 +8,20 @@ class WordWrapper:
         if len(text) <= columnWidth:
             return text
 
-        wrapLimit=text.find(" ")
-        
-        wrappedText=""
-        remainingText=""
-        
-        if (wrapLimit!=-1) and (wrapLimit<columnWidth):
-            wrappedText=text[0:wrapLimit]+"\n"
-            remainingText=text[wrapLimit:].strip()
-        else:
-            wrappedText=text[0:columnWidth]+"\n"
-            remainingText=text[columnWidth:].strip()
-            
-        print(wrappedText)
-        print(remainingText)
+        wrapLimit=self.obtainWrapLimit(text, columnWidth)
+        wrappedText=text[0:wrapLimit]+"\n"
+        remainingText=text[wrapLimit:].strip()
         
         return wrappedText+self.wrap(remainingText, columnWidth)
+    
 
     def isNegativeNumber(self, columnWidth):
         if columnWidth <= 0:
             raise ValueError("Column width must be greater than 0")
+
+    def obtainWrapLimit(self, text: str, columnWidth: int) -> int:
+        wrapLimit=text.find(" ")
+        if (wrapLimit!=-1) and (wrapLimit<columnWidth):
+            return wrapLimit
+        
+        return columnWidth
