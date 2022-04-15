@@ -1,6 +1,3 @@
-import string
-
-
-class WordWrapper():
-  def wrap(text:string, columnWidth:int) -> string:
-    return ""
+class WordWrapper:
+    def wrap(self, text, columnWidth) -> str:
+      return "-1"
