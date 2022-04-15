@@ -16,3 +16,8 @@ class TestWordWrap(TestCase):
         word_wrapper = WordWrapper()
 
         assert_that(word_wrapper.wrap).raises(ValueError).when_called_with("hola", -4)
+    
+    def test_zero_are_not_allowed(self):
+        word_wrapper = WordWrapper()
+
+        assert_that(word_wrapper.wrap).raises(ValueError).when_called_with("hola", 0)
