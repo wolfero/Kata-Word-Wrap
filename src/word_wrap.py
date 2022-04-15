@@ -8,5 +8,5 @@ class WordWrapper:
         return text
 
     def isNegativeNumber(self, columnWidth):
-        if columnWidth < 0:
+        if columnWidth <= 0:
             raise ValueError("Column width must be greater than 0")
